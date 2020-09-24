@@ -1,10 +1,10 @@
+/* I decided to make the Menu / Navigation a component,
+because you could reuse the Menu easily if you would 
+add more pages to the project */
+
 import React, { Component } from 'react';
-import logo from '../images/500_acato-marvel-logo.png';
-import searchIcon from '../images/search-icon.svg';
-import ascendingIcon from '../images/ascending-icon.svg';
-import descendingIcon from '../images/descending-icon.svg';
-import muteIcon from '../images/mute-icon.svg';
 import './Menu.scss';
+import logo from '../images/500_acato-marvel-logo.png';
 
 export default class Menu extends Component {
   constructor(props) {
@@ -40,18 +40,18 @@ export default class Menu extends Component {
         </div>
         <section className="menu__search">
           <input type="text" class="input basic-box-shadow" placeholder="Which heroe are you looking for?"/>
-          <img src={searchIcon} alt="Search icon"/>
+          <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936415/acato%20challenge/search-icon_suvrnh.svg" alt="Search icon"/>
           <button className="basic-box-shadow">Search</button>
         </section>
         <section className="menu__sort">
           <button className="menu__sort--ascending basic-box-shadow">
-            <img src={ascendingIcon} alt="Ascending icon"/>
+            <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936414/acato%20challenge/ascending-icon_jpu1mh.svg" alt="Ascending icon"/>
           </button>
           <button className="menu__sort--descending basic-box-shadow">
-            <img src={descendingIcon} alt="Descending icon"/>
+            <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936414/acato%20challenge/descending-icon_mn3kqm.svg" alt="Descending icon"/>
           </button>
           <button className="menu__sort--mute basic-box-shadow">
-            <img src={muteIcon} alt="Mute and unmute icon"/>
+            <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936412/acato%20challenge/mute-icon_ype6db.svg" alt="Mute and unmute icon"/>
           </button>
         </section>
       </nav>
