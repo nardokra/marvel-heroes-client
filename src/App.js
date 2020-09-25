@@ -1,27 +1,65 @@
-/* I decided to make use of react-router-dom for muting the document list,
-it gives the user a feeling that they interact with a website. Because most users are not
-aware of the fact that a single page application doesn't need URLs anymore. */
-
 import React, {Component} from 'react';
-// import axios from 'axios';
 import './App.scss';
 import Menu from './components/Menu';
 import DocumentList from './components/DocumentList';
-import Landing from './components/Landing';
 import Heroes from './heroes.json';
-import {Route} from 'react-router-dom'; 
+import Landing from './components/Landing';
+// import axios from 'axios';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.muteDocumentList = this.muteDocumentList.bind(this);
+  }
+  
   state = {
-    heroes: Heroes
+    heroes: Heroes,
+    documentListMuted: false,
+    queriedHeroes: Heroes,
+  }
+
+  // Function to make the list mutable
+  muteDocumentList = () => { 
+    this.setState({
+      documentListMuted: !this.state.documentListMuted
+    }) 
+  }
+
+  // Function to make the list searchable
+  searchHeroes(query) {
+    let documentList = [];
+    let newDocumentList = [];
+
+    if (query.target.value !== "") {
+      documentList = [...this.state.filtered];
+      newDocumentList = documentList.filter(item => {
+        const name = item.name.toLowerCase();
+        const filter = query.target.value.toLowerCase();
+        return (name.includes(filter));
+      });
+    } else {
+      newDocumentList = [...this.state.heroes];
+    }
+
+    this.setState({
+      queriedHeroes: newDocumentList
+    });
   }
 
   render(){
     return (
       <div className="app">
-        <Menu/>
-        <Route exact path={'/'} component={() =><Landing/>} />
-        <Route path={'/heroes'} component={() => <DocumentList heroes={this.state.heroes}/>} />
+        {/* lifting the state up within the menu child components for muting de list*/}
+        <Menu 
+          documentListMuted={this.state.documentListMuted}
+          muteDocumentList={this.muteDocumentList}
+          searchHeroes={this.searchHeroes}
+        />
+        <Landing documentListMuted={this.state.documentListMuted}/>
+        <DocumentList 
+          heroes={this.state.queriedHeroes} 
+          documentListMuted={this.state.documentListMuted}
+        />
       </div>
     );
   }
