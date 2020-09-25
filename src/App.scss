@@ -4,6 +4,13 @@ body {
   font-family: 'Roboto Mono', 'Ubuntu';
   font-size: 14px;
   background-color: #CEDDFF;
+  height: 100%;
+  width: 100%;
+}
+
+html, .app, #root{
+  height: 100%;
+  width: 100%;
 }
 
 h1, h2{
@@ -13,7 +20,7 @@ h1, h2{
 }
 
 h1{
-  font-size: 6rem;
+  font-size: 5rem;
 }
 
 h2{

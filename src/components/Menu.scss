@@ -6,18 +6,19 @@
   width: 100%;
   background-color: white;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
 .menu__logo{
   height: 70%;
   width: 10%;
-  margin: 1rem;
   display: flex;
   align-items: center;
 }
 
-.menu__logo--img{
+.menu__logo__img{
   max-height: auto;
   width: 100%;
 }
@@ -26,10 +27,9 @@
   display: flex;
   width: 70%;
   justify-content: space-around;
-  margin: 1rem;
 }
 
-.menu__search > input{
+.menu__search__input{
   height: 30px;
   width: 75%;
   border-radius: 100px;
@@ -37,12 +37,12 @@
   padding-left: 1.5rem;
 }
 
-.menu__search > img{
+.menu__search__img{
   margin-left: -40px;
   cursor: pointer;
 }
 
-.menu__search > button{
+.menu__search__button{
   width: 20%;
   border-radius: 100px;
   background-color: black;
@@ -55,10 +55,9 @@
   display: flex;
   width: 10%;
   justify-content: space-around;
-  margin: 1rem;
 }
 
-.menu__sort > button{
+.menu__sort__button{
   height: 30px;
   width: 30px;
   border-radius: 100px;
@@ -66,9 +65,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #D1D1D1
 }
 
-.menu__sort > button > img{
+.menu__sort__button > img{
  height: 80%;
  width: auto;
 }
