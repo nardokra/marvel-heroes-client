@@ -3,35 +3,54 @@ and separate the concerns. */
 
 import React, { Component } from 'react';
 import './DocumentList.scss';
-import AddDocumentToList from './AddDocumentToList';
+import ChangeDocumentList from './ChangeDocumentList';
 
 export default class Documentlist extends Component {
   constructor(props) {
     super(props);
-    this.addDocumentToListFormVisible = this.addDocumentToListFormVisible.bind(this);
+    this.changeDocumentListFormVisible = this.changeDocumentListFormVisible.bind(this);
     this.addDocumentToList = this.addDocumentToList.bind(this);
+    this.updateDocumentInList = this.updateDocumentInList.bind(this);
   }
 
   state = {
-    heroes: this.props.heroes.data
+    heroes: this.props.heroes.data,
+    documentIndexToUpdate: undefined
   }
 
-  // function to load in the form for adding documents to the list
-  addDocumentToListFormVisible(){
+  // Function to load in the form for adding documents to the list
+  changeDocumentListFormVisible(){
     this.setState({
-      addDocumentToListFormVisible: !this.state.addDocumentToListFormVisible
+      changeDocumentListFormVisible: !this.state.changeDocumentListFormVisible,
+      documentIndexToUpdate: undefined // Clear the document index value when update, so a empty form will appear when adding a document to the list
     })
   }
 
-  // function for adding documents to the list
-  addDocumentToList(updatedDocumentList){
-    var newDocumentList = [...this.state.heroes, updatedDocumentList];
+  // Function for adding documents to the list
+  addDocumentToList(newDocument){
+    var newDocumentList = [newDocument, ...this.state.heroes];
     this.setState({
       heroes: newDocumentList
     })
   }
 
-  // function to remove documents from the list
+  // Function for adding documents to the list
+  updateDocumentInList(updatedDocument){
+    var newDocumentList = [...this.state.heroes];
+    newDocumentList[this.state.documentIndexToUpdate] = updatedDocument;
+    this.setState({
+      heroes: newDocumentList,
+      documentIndexToUpdate: undefined // Clear the document index value when update, so a empty form will appear when adding a document to the list
+    })
+  }
+
+  documentIndexToUpdate(index){
+    this.setState({
+      documentIndexToUpdate: index
+    })
+  }
+
+  // Function to remove documents from the list
   removeDocumentFromList(index){
     var newDocumentList = [...this.state.heroes];
     newDocumentList.splice(index, 1);
@@ -41,7 +60,7 @@ export default class Documentlist extends Component {
   }
 
   render() {
-    // build in an statement to see if the data is represented to prevent a crash by errors
+    // Build in an statement to see if the data is represented to prevent a crash by errors
     if(this.state.heroes.length === 0){
       return(
         <main className={this.props.documentListMuted === false ? "document-list__no-data" : "document-list__no-data--hidden"}>
@@ -74,21 +93,35 @@ export default class Documentlist extends Component {
                 </div>
               </div>
               <div className="document-item__actions-box">
-                <button className="document-item__button basic-box-shadow">
+                <button className="document-item__button document-item__button--edit basic-box-shadow"
+                onClick={()=>{
+                  this.changeDocumentListFormVisible(); 
+                  this.documentIndexToUpdate(index);
+                }}
+                >
                   <img className="document-item__image" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/edit-icon_eyazch.svg" alt="Edit icon"/>
                 </button>
-                <button className="document-item__button basic-box-shadow" onClick={()=>{this.removeDocumentFromList(index)}}>
+                <button className="document-item__button document-item__button--remove basic-box-shadow" onClick={()=>{this.removeDocumentFromList(index)}}>
                   <img className="document-item__image" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/bin-icon_cdoalj.svg" alt="Delete icon"/>
                 </button>
               </div>
             </section>
             )
           )}
-          <button className="add-document basic-box-shadow" onClick={()=>{this.addDocumentToListFormVisible()}}>
+          <button className="add-document basic-box-shadow" onClick={()=>{this.changeDocumentListFormVisible()}}>
             <img className="add-document__img" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/plus-icon_niqkil.svg" alt="Add button icon"/>
           </button>
-          { // added a lazy condition here to toggle the form for adding a document to the list
-          this.state.addDocumentToListFormVisible &&  <AddDocumentToList toggleAddDocumentToListForm={this.addDocumentToListFormVisible} addDocumentToList={this.addDocumentToList}/>}
+          { // Added a lazy condition here to toggle the form for adding a document to the list
+            // Passed in props to make it possible to lift up the state for the functionalities to update de document list
+            // and passed in the props to load in the data in the form when using de "edit" functionality and to make the conditions work for rendering the form
+            this.state.changeDocumentListFormVisible &&  
+            <ChangeDocumentList 
+              toggleChangeDocumentListForm={this.changeDocumentListFormVisible} 
+              addDocumentToList={this.addDocumentToList} 
+              updateDocumentInList={this.updateDocumentInList}
+              documentData={this.state.heroes[this.state.documentIndexToUpdate]}
+            />
+            }
         </main>
       )
     }
