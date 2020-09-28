@@ -14,19 +14,19 @@ export default class Documentlist extends Component {
   }
 
   state = {
-    heroes: this.props.heroes.data,
+    heroes: this.props.heroes,
     documentIndexToUpdate: undefined
   }
 
-  // Function to load in the form for adding documents to the list
+  // Method to load in the form for adding documents to the list
   changeDocumentListFormVisible(){
     this.setState({
       changeDocumentListFormVisible: !this.state.changeDocumentListFormVisible,
-      documentIndexToUpdate: undefined // Clear the document index value when update, so a empty form will appear when adding a document to the list
+      documentIndexToUpdate: undefined // Clear the document index value when updated, so an empty form will appear when adding a document to the list
     })
   }
 
-  // Function for adding documents to the list
+  // Method for adding documents to the list
   addDocumentToList(newDocument){
     var newDocumentList = [newDocument, ...this.state.heroes];
     this.setState({
@@ -34,23 +34,24 @@ export default class Documentlist extends Component {
     })
   }
 
-  // Function for adding documents to the list
+  // Method for adding documents to the list
   updateDocumentInList(updatedDocument){
     var newDocumentList = [...this.state.heroes];
     newDocumentList[this.state.documentIndexToUpdate] = updatedDocument;
     this.setState({
       heroes: newDocumentList,
-      documentIndexToUpdate: undefined // Clear the document index value when update, so a empty form will appear when adding a document to the list
+      documentIndexToUpdate: undefined // Clear the document index value when updated, so an empty form will appear when adding a document to the list
     })
   }
 
+  // Method to store the index of the document which needs adjustments
   documentIndexToUpdate(index){
     this.setState({
       documentIndexToUpdate: index
     })
   }
 
-  // Function to remove documents from the list
+  // Method to remove documents from the list
   removeDocumentFromList(index){
     var newDocumentList = [...this.state.heroes];
     newDocumentList.splice(index, 1);
@@ -70,7 +71,7 @@ export default class Documentlist extends Component {
     } else{
       return (
         <main className={this.props.documentListMuted === false ? "document-list" : "document-list--hidden"}>
-          { this.state.heroes.map((heroe, index) =>(
+          { this.props.heroes.map((heroe, index) =>(
             <section className="document-item basic-box-shadow" key={index}>
               <div className="document-item__content-box">
                 <div className="document-item__signature basic-box-shadow">

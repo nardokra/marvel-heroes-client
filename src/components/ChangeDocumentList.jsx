@@ -40,7 +40,7 @@ export default class AddDocumenttolist extends Component {
     })
   }
 
-  // This is a function to validate the form input
+  // This is a method to validate the form input
   validateFormInput = (event) => {
     if(event.target.name === "name"){
       if(!this.state.formState.name || this.state.formState.name.length < 4 ){

@@ -10,35 +10,45 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.muteDocumentList = this.muteDocumentList.bind(this);
-  }
-  
-  state = {
-    heroes: Heroes,
-    documentListMuted: false,
-    queriedHeroes: Heroes,
+    this.searchHeroes = this.searchHeroes.bind(this);
+    this.sortDocumentListAscending = this.sortDocumentListAscending.bind(this);
+    this.sortDocumentListDescending = this.sortDocumentListDescending.bind(this);
+
+    this.state = {
+      heroes: Heroes.data,
+      documentListMuted: false,
+      queriedHeroes: Heroes.data
+    }
   }
 
-  // Function to make the list mutable
+  // Method to make the list mutable
   muteDocumentList = () => { 
     this.setState({
       documentListMuted: !this.state.documentListMuted
     }) 
   }
 
-  // Function to make the list searchable
-  searchHeroes(query) {
+  // Method to make the list searchable
+  searchHeroes = (query) => {
     let documentList = [];
+    let filteredList = [];
     let newDocumentList = [];
 
-    if (query.target.value !== "") {
-      documentList = [...this.state.filtered];
-      newDocumentList = documentList.filter(item => {
-        const name = item.name.toLowerCase();
-        const filter = query.target.value.toLowerCase();
-        return (name.includes(filter));
+    if (query !== "") {
+      documentList = [...this.state.heroes];
+      filteredList = documentList.filter(heroe => {
+        const name = heroe.name.toLowerCase();
+        const superPower = heroe.superPowers.toLowerCase();
+        const filter = query.toLowerCase();
+        return (name.includes(filter) || superPower.includes(filter));
       });
+      if(filteredList.length <= 0){
+        newDocumentList = [];
+      } else{
+        newDocumentList = filteredList;
+      }
     } else {
-      newDocumentList = [...this.state.heroes];
+      newDocumentList = this.state.heroes;
     }
 
     this.setState({
@@ -46,22 +56,73 @@ class App extends Component {
     });
   }
 
+    // Method to make the document list ascending
+    sortDocumentListAscending = () => {
+      let sortedList = this.state.queriedHeroes.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (b.name > a.name) {
+            return -1;
+        }
+        return 0;
+      })
+
+      this.setState({
+        queriedHeroes: sortedList
+      })
+    }
+  
+    // Method to make the document list descending
+    sortDocumentListDescending = () => {
+      let sortedList = this.state.queriedHeroes.sort((a, b) => {
+        if (a.name > b.name) {
+          return -1;
+        }
+        if (b.name > a.name) {
+            return 1;
+        }
+        return 0;
+      })
+
+      this.setState({
+        queriedHeroes: sortedList
+      })
+    }
+
   render(){
-    return (
-      <div className="app">
-        {/* lifting the state up within the menu child components for muting de list*/}
-        <Menu 
-          documentListMuted={this.state.documentListMuted}
-          muteDocumentList={this.muteDocumentList}
-          searchHeroes={this.searchHeroes}
-        />
-        <Landing documentListMuted={this.state.documentListMuted}/>
-        <DocumentList 
-          heroes={this.state.queriedHeroes} 
-          documentListMuted={this.state.documentListMuted}
-        />
-      </div>
-    );
+    if(this.state.queriedHeroes.length === 0){
+      return(
+        <div className="app">
+          <Menu 
+            documentListMuted={this.state.documentListMuted}
+            muteDocumentList={this.muteDocumentList}
+            searchHeroes={this.searchHeroes}
+            sortDocumentListAscending={this.sortDocumentListAscending}
+            sortDocumentListDescending={this.sortDocumentListDescending}
+          />
+          <Landing/>
+        </div>
+      )
+    } else{
+      return (
+        <div className="app">
+          {/* lifting the state up within the menu child components for muting de list*/}
+          <Menu 
+            documentListMuted={this.state.documentListMuted}
+            muteDocumentList={this.muteDocumentList}
+            searchHeroes={this.searchHeroes}
+            sortDocumentListAscending={this.sortDocumentListAscending}
+            sortDocumentListDescending={this.sortDocumentListDescending}
+          />
+          <Landing documentListMuted={this.state.documentListMuted}/>
+          <DocumentList 
+            heroes={this.state.queriedHeroes} 
+            documentListMuted={this.state.documentListMuted}
+          />
+        </div>
+      );
+    }
   }
 }
 
