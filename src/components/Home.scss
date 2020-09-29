@@ -1,17 +1,19 @@
-.landing-content{
+.home-content{
   width: 100%;
   height: 100%;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #2265FF;
 }
 
-.landing-content--hidden{
+.home-content--hidden{
   display: none;
 }
 
-.landing-content__title{
+.home-content__title{
   text-align: center;
-  width: 60%;
+  width: 40%;
+  color: white;
 }
