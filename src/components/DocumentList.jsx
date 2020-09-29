@@ -109,9 +109,10 @@ export default class Documentlist extends Component {
       documentList = [...this.state.heroes];
       filteredList = documentList.filter(heroe => {
         const name = heroe.name.toLowerCase();
+        const description = heroe.description.toLowerCase();
         const superPower = heroe.superPowers.toLowerCase();
         const filter = query.toLowerCase();
-        return (name.includes(filter) || superPower.includes(filter));
+        return (name.includes(filter) || superPower.includes(filter) || description.includes(filter));
       });
       if(filteredList.length <= 0){
         newDocumentList = [];
