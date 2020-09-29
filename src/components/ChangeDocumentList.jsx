@@ -11,18 +11,17 @@ import TextField from '@material-ui/core/TextField';
 import './ChangeDocumentList.scss';
 
 // Overwriting some styling from the @material-ui/core
-const formStylingMaiOverwrite = {
-  width: "500px",
-  height: "70px",
-  boxSizing: "border-box",
-  resize: "none",
-  marginBottom: "20px"
-}
-
-export default class AddDocumenttolist extends Component {
+export default class ChangeDocumentList extends Component {
   state = {
     formState: {},
-    formValidationErrors: {}
+    formValidationErrors: {},
+    formStylingMaiOverwrite : {
+      width: "500px",
+      height: "70px",
+      boxSizing: "border-box",
+      resize: "none",
+      marginBottom: "20px"
+    }
   }
   
   componentDidMount(){
@@ -30,6 +29,15 @@ export default class AddDocumenttolist extends Component {
     if(this.props.documentData !== undefined){
       this.setState({
         formState: this.props.documentData
+      })
+    }
+    
+    if(window.innerWidth < 600){
+      let newFormStylingMaiOverwrite = {...this.state.formStylingMaiOverwrite};
+      newFormStylingMaiOverwrite.width = "250px";
+      newFormStylingMaiOverwrite.marginBottom = "35px";
+      this.setState({
+        formStylingMaiOverwrite: newFormStylingMaiOverwrite
       })
     }
   }
@@ -118,7 +126,7 @@ export default class AddDocumenttolist extends Component {
           <p className="add-document-form__close" onClick={() => {this.props.toggleChangeDocumentListForm()}}>X</p>
           <h2 className="add-document-form__h2">{this.props.documentData === undefined ? "ADD YOUR HEROE" : "EDIT YOUR HEROE"}</h2>
           <TextField
-            style={formStylingMaiOverwrite}
+            style={this.state.formStylingMaiOverwrite}
             required
             name="name"
             label="Heroe name"
@@ -132,11 +140,11 @@ export default class AddDocumenttolist extends Component {
             error={this.state.formValidationErrors.nameErrorBoolean}
           />
           <TextField
-            style={formStylingMaiOverwrite}
+            style={this.state.formStylingMaiOverwrite}
             required
             name="description"
             label="Heroe description"
-            placeholder="f.e. Bitten by a radioactive spider.."
+            placeholder="f.e. Bitten by.."
             value={this.state.description}
             defaultValue={this.props.documentData === undefined ? "" : this.props.documentData.description}
             onChange={(event)=>{this.handleChangeFormState(event)}}
@@ -146,7 +154,7 @@ export default class AddDocumenttolist extends Component {
             error={this.state.formValidationErrors.descriptionErrorBoolean}
           />
           <TextField
-            style={formStylingMaiOverwrite}
+            style={this.state.formStylingMaiOverwrite}
             required
             name="superPowers"
             label="Super powers"

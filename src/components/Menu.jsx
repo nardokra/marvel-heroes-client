@@ -15,6 +15,7 @@ export default class Menu extends Component {
     documentListMuted: false,
     documentListSearchQuery: "",
     documentListSorted: "",
+    mobileMenuOpened: false
   }
 
   // Method to mute the document list
@@ -68,6 +69,13 @@ export default class Menu extends Component {
     this.props.updateSort("descending");
   }
 
+  // Method to open or close mobile menu
+  openMobileMenu = () =>{
+    this.setState({
+      mobileMenuOpened: !this.state.mobileMenuOpened
+    })
+  }
+
   render() {
     return (
       <nav className="menu basic-box-shadow">
@@ -75,11 +83,12 @@ export default class Menu extends Component {
           <img className="menu__logo__img" src={logo} alt="logo"/>
         </div>
         <form className="menu__search">
-          <input type="text" className="menu__search__input basic-box-shadow" placeholder="Find your Heroe! Search by name or super power.." value={this.state.searchQuery} onChange={(event)=>{ this.updateSearchQueryState(event) }}/>
+          <input type="text" className="menu__search__input menu__search__input--large basic-box-shadow" placeholder="Search by name or super power.." value={this.state.searchQuery} onChange={(event)=>{ this.updateSearchQueryState(event) }}/>
+          <input type="text" className="menu__search__input menu__search__input--small basic-box-shadow" placeholder="Search.." value={this.state.searchQuery} onChange={(event)=>{ this.updateSearchQueryState(event) }}/>
           <img className="menu__search__img" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936415/acato%20challenge/search-icon_suvrnh.svg" alt="Search icon" onClick={(event)=>{ event.preventDefault(); this.searchHeroes(this.state.documentListSearchQuery)}}/>
           <button className="menu__search__button basic-box-shadow" onClick={(event)=>{ event.preventDefault(); this.searchHeroes(this.state.documentListSearchQuery)}}>Search</button>
         </form>
-        <section className="menu__sort">
+        <section className={ !this.state.mobileMenuOpened ? "menu__sort" : "menu__sort menu__sort--visible"}>
           <button className="menu__sort__button menu__sort__button--ascending basic-box-shadow" onClick={()=>{this.sortDocumentListAscending()}}>
             <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936414/acato%20challenge/ascending-icon_jpu1mh.svg" alt="Ascending icon"/>
           </button>
@@ -93,6 +102,13 @@ export default class Menu extends Component {
               <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936412/acato%20challenge/mute-icon_ype6db.svg" alt="Mute icon"/>
             }
           </button>
+        </section>
+        <section className="menu__mobile">
+          { 
+            !this.state.mobileMenuOpened ? 
+            <img className="menu__mobile__img menu__mobile__img--open" src="https://res.cloudinary.com/dconurgxl/image/upload/v1601276978/acato%20challenge/menu-icon_igpjvk.svg" alt="Menu icon closed" onClick={()=>{this.openMobileMenu()}}/> :
+            <img className="menu__mobile__img menu__mobile__img--close" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/plus-icon_niqkil.svg" alt="Menu icon open" onClick={()=>{this.openMobileMenu()}}/>
+          }
         </section>
       </nav>
     )

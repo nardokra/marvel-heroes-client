@@ -198,9 +198,9 @@ export default class Documentlist extends Component {
                 <div className="document-item__data">
                   <div className="document-item__top-section">
                     <div className="document-item__title basic-box-shadow">
-                      <h3>{heroe.name}</h3>
+                      <h3 className="document-item__title__h3">{heroe.name}</h3>
                     </div>
-                    <div className="document-item__numbers">
+                    <div className="document-item__properties">
                       <p>Powers: {heroe.superPowers}</p>
                     </div>
                   </div>

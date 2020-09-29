@@ -17,3 +17,37 @@
   width: 40%;
   color: white;
 }
+
+.home-content__h1{
+  font-size: 4rem;
+}
+
+@media (max-width: 900px) {
+  .home-content__title{
+    width: 50%;
+  }
+
+  .home-content__h1{
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 750px) {
+  .home-content__h1{
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .home-content__title{
+    width: 70%;
+  }
+
+  .home-content__h1{
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+
+}
