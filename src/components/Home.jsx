@@ -12,6 +12,7 @@ export default class Landing extends Component {
       <main className={this.props.documentListMuted === true ? "home-content" : "home-content--hidden"}>
         <div className="home-content__title">
           <h1 className="home-content__h1">FIND YOUR NEXT FRONT-END HEROE!</h1>
+          <p>Hint: Query Nardo ;)</p>
         </div>
       </main>
     )
