@@ -9,14 +9,15 @@ Can be used to search, sort, add, edit and remove Super Heroes.
 * The list is sortable an searchable via the menu / navigation.
 * The app is spiced up with shadows, transitions, hover-states.
 * The API is set up with Node and Express.
-* [API repository](https://github.com/nardokra/marvel-heroes-api)
+* The app is fully responsive till a min width of 320px.
+* [API repository](https://github.com/nardokra/marvel-heroes-api).
 
 ### Technologies used client side
 * ReactJS, as JS framework via [Create React App](https://github.com/facebook/create-react-app).
 * Webpack, via Create React App. It configures a "black box" Webpack setup.
-* Axios, for API request
-* Qs, to parse nested structures
-* Material-ui, for styling the form validation
+* Axios, for API request.
+* Qs, to parse nested structures.
+* Material-ui, for styling the form validation.
 
 ### Technologies used server side
 * NodeJS

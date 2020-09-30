@@ -189,7 +189,7 @@ export default class Documentlist extends Component {
         // A conditional statement to mute and unmute the document list, for this app it makes more sense to just toggle classes to prevent a new api request and new render
         <main className={this.props.documentListMuted === false ? "document-list" : "document-list--hidden"}>
           { this.state.queriedHeroes.map((heroe, index) =>(
-            <section className="document-item basic-box-shadow" key={index}>
+            <section className="document-item basic-box-shadow shadow-drop-center" key={index}>
               <div className="document-item__content-box">
                 <div className="document-item__signature basic-box-shadow">
                   <p>
@@ -211,23 +211,26 @@ export default class Documentlist extends Component {
                 </div>
               </div>
               <div className="document-item__actions-box">
-                <button className="document-item__button document-item__button--edit basic-box-shadow"
+                <button className="document-item__button document-item__button--edit basic-box-shadow tooltip"
                 onClick={()=>{
                   this.changeDocumentListFormVisible(); 
                   this.documentIndexToUpdate(index);
                 }}
                 >
                   <img className="document-item__image" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/edit-icon_eyazch.svg" alt="Edit icon"/>
+                  <p className="tooltip-text">Edit heroe</p>
                 </button>
-                <button className="document-item__button document-item__button--remove basic-box-shadow" onClick={()=>{this.removeDocumentFromList(index)}}>
+                <button className="document-item__button document-item__button--remove basic-box-shadow tooltip" onClick={()=>{this.removeDocumentFromList(index)}}>
                   <img className="document-item__image" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/bin-icon_cdoalj.svg" alt="Delete icon"/>
+                  <p className="tooltip-text">Remove heroe</p>
                 </button>
               </div>
             </section>
             )
           )}
-          <button className="add-document basic-box-shadow" onClick={()=>{this.changeDocumentListFormVisible()}}>
-            <img className="add-document__img" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/plus-icon_niqkil.svg" alt="Add button icon"/>
+          <button className="add-document basic-box-shadow tooltip" onClick={()=>{this.changeDocumentListFormVisible()}}>
+            <p className="tooltip-text">Add heroe</p>
+            <img className="add-document__img" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/plus-icon_niqkil.svg" alt="Add button icon"/> 
           </button>
           { // Added a lazy conditional statement here to toggle the form for adding a document to the list
             // Passed the the functionalities through props to the form to make the functionalities work

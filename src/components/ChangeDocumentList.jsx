@@ -122,7 +122,7 @@ export default class ChangeDocumentList extends Component {
   render() {
     return (
       <div className="add-document-overlay">
-        <form className="add-document-form basic-box-shadow">
+        <form className="add-document-form basic-box-shadow slide-fwd-left">
           <p className="add-document-form__close" onClick={() => {this.props.toggleChangeDocumentListForm()}}>X</p>
           <h2 className="add-document-form__h2">{this.props.documentData === undefined ? "ADD YOUR HEROE" : "EDIT YOUR HEROE"}</h2>
           <TextField

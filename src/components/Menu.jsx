@@ -88,18 +88,26 @@ export default class Menu extends Component {
           <img className="menu__search__img" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936415/acato%20challenge/search-icon_suvrnh.svg" alt="Search icon" onClick={(event)=>{ event.preventDefault(); this.searchHeroes(this.state.documentListSearchQuery)}}/>
           <button className="menu__search__button basic-box-shadow" onClick={(event)=>{ event.preventDefault(); this.searchHeroes(this.state.documentListSearchQuery)}}>Search</button>
         </form>
-        <section className={ !this.state.mobileMenuOpened ? "menu__sort" : "menu__sort menu__sort--visible"}>
-          <button className="menu__sort__button menu__sort__button--ascending basic-box-shadow" onClick={()=>{this.sortDocumentListAscending()}}>
+        <section className={ !this.state.mobileMenuOpened ? "menu__sort" : "menu__sort menu__sort--visible slide-fwd-left"}>
+          <button className="menu__sort__button menu__sort__button--ascending basic-box-shadow tooltip" onClick={()=>{this.sortDocumentListAscending()}}>
             <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936414/acato%20challenge/ascending-icon_jpu1mh.svg" alt="Ascending icon"/>
+            <p className="tooltip-text">Sort by ascending</p>
           </button>
-          <button className="menu__sort__button menu__sort__button--descending basic-box-shadow" onClick={()=>{this.sortDocumentListDescending()}}>
+          <button className="menu__sort__button menu__sort__button--descending basic-box-shadow tooltip" onClick={()=>{this.sortDocumentListDescending()}}>
             <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936414/acato%20challenge/descending-icon_mn3kqm.svg" alt="Descending icon"/>
+            <p className="tooltip-text">Sort by descending</p>
           </button>
-          <button className="menu__sort__button basic-box-shadow" onClick={()=>{this.muteDocumentList()}}>
+          <button className="menu__sort__button basic-box-shadow tooltip" onClick={()=>{this.muteDocumentList()}}>
             {
               this.state.documentListMuted === true ? 
-              <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936412/acato%20challenge/unmute-icon_yy9rmr.svg" alt="Unute icon"/> :
-              <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936412/acato%20challenge/mute-icon_ype6db.svg" alt="Mute icon"/>
+              <>
+                <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936412/acato%20challenge/unmute-icon_yy9rmr.svg" alt="Unute icon"/>
+                <p className="tooltip-text">Show heroe list</p> 
+              </> :
+              <>
+                <img src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936412/acato%20challenge/mute-icon_ype6db.svg" alt="Mute icon"/>
+                <p className="tooltip-text">Hide heroe list</p> 
+              </>
             }
           </button>
         </section>
