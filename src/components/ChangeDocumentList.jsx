@@ -88,7 +88,7 @@ export default class ChangeDocumentList extends Component {
     } else if(event.target.name === "superPowers"){
       if(!this.state.formState.superPowers || this.state.formState.superPowers === "" || this.state.formState.superPowers.split(',').length > 3){
         let newFormValidationErrors = {...this.state.formValidationErrors};
-        newFormValidationErrors.superPowersError = "Use a min. of 1 and a max. of 3 super powers seperated by a space"
+        newFormValidationErrors.superPowersError = "Use a min. of 1 and a max. of 3 super powers seperated by a comma"
         newFormValidationErrors.superPowersErrorBoolean = true;
         this.setState({
           formValidationErrors: newFormValidationErrors

@@ -1,7 +1,7 @@
 /* 
   I decided to make the list a component, in this way I can keep the code clean
   and separate the concerns. Decided to load the data in here, because this is where all the actions
-  on the list would happen. I have put the API requests in a seperated folder "utils". To keep it
+  on the list would happen. I have put the API requests in a separated folder "utils". To keep it
   clean.
 */
 
@@ -199,7 +199,7 @@ export default class Documentlist extends Component {
                 <div className="document-item__data">
                   <div className="document-item__top-section">
                     <div className="document-item__title basic-box-shadow">
-                      <h3 className="document-item__title__h3">{heroe.name}</h3>
+                      <p className="document-item__title__text">{heroe.name}</p>
                     </div>
                     <div className="document-item__properties">
                       <p>Powers: {heroe.superPowers}</p>
