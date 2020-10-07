@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 import './Menu.scss';
-import logo from '../images/500_acato-marvel-logo.png';
+import logo from '../images/marvel-logo-black-white.png';
 
 export default class Menu extends Component {
 

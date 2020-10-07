@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import './DocumentList.scss';
 import { getAllHeroeDocuments, postRemoveEditHeroeDocument, postAddHeroeDocument, postEditHeroeDocument } from './../utils/documentListRequests';
 import ChangeDocumentList from './ChangeDocumentList';
+import loading from '../images/loading.gif';
 
 export default class Documentlist extends Component {
   constructor(props) {
@@ -22,21 +23,28 @@ export default class Documentlist extends Component {
     heroes: {},
     queriedHeroes: {},
     documentIndexToUpdate: undefined,
+    loading: false,
     error: null
   }
 
   componentDidMount(){
     // Requesting the list form the API
+    this.setState({
+      loading: true
+    })
+
     getAllHeroeDocuments()
     .then(allHeroes => {
       this.setState({
         heroes: allHeroes.data,
         queriedHeroes: allHeroes.data,
+        loading: false
       });
     })
     .catch((error)=>{
       this.setState({
-        error: error
+        error: error,
+        loading: false
       });
     })
   }
@@ -167,7 +175,11 @@ export default class Documentlist extends Component {
     // Build in an conditional statement to see if the data is represented to prevent a crash by errors
     if(this.state.heroes.length === 0 || this.state.heroes.length === undefined){
       return(
-        <main>
+        <main className="document-list__no-data">
+          { 
+            // conditional statement to display the loading gif to indicate that the data is not there yet
+            this.state.loading === true && <img className="loading__img" src={loading} alt="Loading gif"/> 
+          }
           <button className="add-document basic-box-shadow" onClick={()=>{this.changeDocumentListFormVisible()}}>
             <img className="add-document__img" src="https://res.cloudinary.com/dconurgxl/image/upload/v1600936413/acato%20challenge/plus-icon_niqkil.svg" alt="Add button icon"/>
           </button>
