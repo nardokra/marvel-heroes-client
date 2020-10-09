@@ -43,7 +43,7 @@ export default class Documentlist extends Component {
     })
     .catch((error)=>{
       this.setState({
-        error: error,
+        error: "Something went wrong, please try to reload",
         loading: false
       });
     })
